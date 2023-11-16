@@ -1,0 +1,9 @@
+# Ignore vendor directory (Composer dependencies)
+/vendor/
+
+# Ignore log files and directories
+/log/
+*.log
+
+# Ignore user-specific files
+.env
