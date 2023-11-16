@@ -14,6 +14,10 @@
         <!-- Registration Form -->
         <form action="register_process.php" method="post">
             <div class="mb-3">
+                <label for="newName" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="newName" name="newName" required>
+            </div>
+            <div class="mb-3">
                 <label for="newUsername" class="form-label">Username:</label>
                 <input type="text" class="form-control" id="newUsername" name="newUsername" required>
             </div>
