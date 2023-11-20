@@ -9,6 +9,18 @@ CREATE TABLE usuarios (
     Contraseña VARCHAR(50)
 );
 
+INSERT INTO Usuarios (Nombre, Email, Contraseña) VALUES
+('Usuario1', 'usuario1@email.com', 'contrasena1'),
+('Usuario2', 'usuario2@email.com', 'contrasena2'),
+('Usuario3', 'usuario3@email.com', 'contrasena3'),
+('Usuario4', 'usuario4@email.com', 'contrasena4'),
+('Usuario5', 'usuario5@email.com', 'contrasena5'),
+('Usuario6', 'usuario6@email.com', 'contrasena6'),
+('Usuario7', 'usuario7@email.com', 'contrasena7'),
+('Usuario8', 'usuario8@email.com', 'contrasena8'),
+('Usuario9', 'usuario9@email.com', 'contrasena9'),
+('Usuario10', 'usuario10@email.com', 'contrasena10');
+
 -- Tabla para CATEGORIAS, en esta tabla se consigna la informacion sobre las categorias del blog
 
 CREATE TABLE categorias (
