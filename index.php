@@ -1,32 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Landing Page</title>
-    <!-- Bootstrap CSS link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <div class="container mt-5">
-        <h1 class="mb-4">Login</h1>
+<?php
+include 'layout/header.php';
+include 'layout/navbar.php';
+include 'db.php';
 
-        <!-- Login Form -->
-        <form action="login.php" method="post">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username:</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        <p class="mt-3">Don't have an account? <a href="register.php">Register here</a></p>
-    </div>
+$blogEntries = getBlogEntries($_GET['search']);
+?>
 
-    <!-- Bootstrap JS scripts (required for some features) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<!-- Your Landing Page Content Goes Here -->
+<div class="container mt-5">
+    <h2>Puras Mierdas</h2>
+
+    <?php
+        foreach ($blogEntries as $entry) {
+            echo '<div class="card mb-4">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title"> <a href="view.php?id=' . $entry['PublicacionID'] . '" >' . htmlspecialchars($entry['Titulo']) . '</a></h5>';
+
+            // Shorten and display body content with ellipsis
+            $shortenedBody = shortenText($entry['Contenido'], 150); // Adjust the length as needed
+            echo '<p class="card-text">' . strip_tags($shortenedBody) . '</p>';
+
+            echo '<p class="card-text">Comentarios: ' . $entry['Comentarios'] . '</p>';
+            echo '</div>';
+            echo '</div>';
+        }
+    ?>
+
+    <!-- Add more blog entries as needed -->
+
+</div>
+
+<?php include 'layout/footer.php'; ?>

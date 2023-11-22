@@ -7,6 +7,9 @@ WORKDIR /var/www/html
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Install MySQLi extension
+RUN docker-php-ext-install mysqli
+
 # Copy only the composer files
 COPY composer.json /var/www/html/
 
