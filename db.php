@@ -63,6 +63,7 @@ function createUser($name, $email, $password) {
          // Store user information in the session
         $_SESSION['email'] = $email;
         $_SESSION['name'] = $name;
+        $_SESSION['ID'] = $row['UserID'];
          // Redirect the user to index.php
         header("Location: index.php");
     } else {
