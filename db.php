@@ -171,7 +171,7 @@ function getCommentsByEntryId($entryId) {
     $conn = connectDB();
 
     // Use prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT c.ComentarioID, c.Contenido, c.FechaComentario, u.Nombre FROM comentarios AS c INNER JOIN usuarios AS u ON c.AutorID = u.UserID WHERE PublicacionID = ?");
+    $stmt = $conn->prepare("SELECT c.ComentarioID, c.Contenido, c.FechaComentario, u.Nombre FROM comentarios AS c INNER JOIN usuarios AS u ON c.AutorID = u.UserID WHERE PublicacionID = ? ORDER BY FechaComentario  DESC");
     $stmt->bind_param("i", $entryId);
     $stmt->execute();
 
