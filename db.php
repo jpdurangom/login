@@ -19,7 +19,7 @@ function closeDB($conn) {
     mysqli_close($conn);
 }
 
-function getBlogEntries($searchTerm = null) {
+function getBlogEntries($searchTerm = null, $page = 1, $numByPage = 5) {
     $conn = connectDB();
 
     $query = "SELECT * FROM publicaciones";
@@ -28,9 +28,15 @@ function getBlogEntries($searchTerm = null) {
     if ($searchTerm !== null) {
         $query .= " WHERE Titulo LIKE '%$searchTerm%' OR Contenido LIKE '%$searchTerm%'";
     }
+    
+    $page = $page ?? 1;
+
+    $offset = $numByPage * $page - $numByPage;
+
+    // $offset = $numByPage * $page - $numByPage
 
     // Add ORDER BY clause to order by date in descending order
-    $query .= " ORDER BY FechaPublicacion DESC";
+    $query .= " ORDER BY FechaPublicacion DESC LIMIT $numByPage OFFSET $offset";
 
     $result = mysqli_query($conn, $query);
 
@@ -213,6 +219,24 @@ function addComment($entryId, $commentText, $authorId) {
 
     closeDB($conn);
 }
+
+function getTotalPages() {
+    $conn = connectDB();
+
+    // Count the total number of records in your table
+    $stmt = $conn->query("SELECT COUNT(*) as total FROM publicaciones");
+    $totalRecords = $stmt->fetch_assoc()['total'];
+
+    // Calculate the total number of pages
+    $numByPage = 5; // Adjust this according to your needs
+    $totalPages = ceil($totalRecords / $numByPage);
+
+    // Close the connection
+    closeDB($conn);
+
+    return $totalPages;
+}
+
 
 
 ?>
